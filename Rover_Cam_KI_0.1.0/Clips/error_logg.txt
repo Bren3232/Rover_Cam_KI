@@ -1,0 +1,3 @@
+Error Logg
+If error is "unsupported operand type(s) for /: 'NoneType' and 'int'" then most likely the camera does not support the set resolution,
+and failed to auto change to another.

@@ -1,0 +1,110 @@
+
+-   ---- Rover Cam KI Config ----
+
+
+- Rover Cam is designed to run without an internet connection, if accurate date stamps
+- are desired, the time will have to be set for each time the program starts.
+- Note: Will lose accuracy over long periods of time. Does not compensate for leap years, or
+- day light savings.
+- Aim for the time that the pi will be booted, plus about 1 minute, for boot and program start.
+- The format is 24 hour time in this order: year, month, day, hour, minute, second.
+set_time = 1000 01 01 01 01 01
+
+run_at_system_boot = N
+
+- When motion is detected, how long should video be recorded for?
+- If set to 3 or less seconds, then images will be saved instead. If set to 0 every motion 
+- frame will be saved. If set to 0.5 then one motion frame per half second will be saved,
+- while motion is detected.
+clip_time = 0.5
+
+- To use a UBS camera leave this setting off
+use_pi_camera = N
+
+- Camera software may adjust this to one of it's nearest capability. Default 640x480.
+resolution = 640x480
+
+- Set the max frames per second. This is limited by processing power so actual FPS maybe
+- lower. If clips are playing fast with shorter clip times then set "Clip Time", try a lower FPS.
+fps = 15
+
+- Motion area size: a lower number here may cause false detections.
+- A higher number will only detect larger moving objects, or closer small objects.
+- Recommended 65 or higher, default 130.								
+motion_area = 130
+
+- Motion sensitivity baseline: a lower number here will increase sensitivity.
+- Is simular to motion area, but is effected more by brightly lite environments.
+- If false detections are a problem, then motion area should be experimented with first.
+- 4 is a good number here
+motion_sens = 4
+
+- mode 1 just records on motion
+- mode 2 records and preforms actions on motion
+- mode 3 just preforms actions on motion
+mode = 1
+
+- A numerical code, of any length, used access menu.
+pin = 123
+
+- Number the failed PIN attempts before key input will be locked for failed_pin_lock_time
+allowable_pin_attempts = 3
+
+- Time to lock any key input after a failed PIN attempt, in seconds. Enter "inf" to lock until pi, or program is
+- restarted.
+failed_pin_lock_time = 30
+
+- Optionally play an audio or python3 files on motion
+- Will play any and all .wav or .py files in "audio" folder, one after another in alphabetical order.
+- (can be left on, will not fault out even if no files in location).
+play_audio = N
+
+- Delay Audio will delay the running of files, in the audio folder. A correct PIN entry in this time
+- frame will cancel the audio.
+delay_audio = 0
+
+- Activation delay will add a time delay from boot up, and disabled state.
+- Is useful if operator is physically inside the camera view, while using key inputs,
+- or will pass through the camera view when leaving the area. (in seconds)
+start_delay = 0
+
+- Setting camera index to -1 is recommended, since the camera indexes on
+- the pi could change. -1 will find any camera attached by lowest index number.
+camera_index = -1
+
+
+- Select Area Of Interest (AOI). Click the "Select/Add To AOI" button to set.
+- Another window will pop-up where you can click and drag. A green rectangle will indicate the
+- area that will be the AOI. Have a camera plugged in with the proper index setting. If an AOI is
+- set then only motion that is detected inside the AOI, will trigger
+- actions, clip recording, or audio. To remove the AOI effect, just clear, and save.
+- Will only work properly on 4:3 resolution ratios, otherwise AOI boxes will be warped.
+
+- Draw AOIs on saved clips and images.
+draw_aoi = Y
+
+
+- PiCamera spacific settings. May have different effects depending on type and version of pi camera used.
+- See PiCamera documentation.
+
+exposure_mode = default
+sensor_mode = default
+awb_mode = default
+brightness = default
+contrast = default
+iso = default
+shutter_speed = default
+
+
+
+- Here you can write your custom program that turns GPIO pins on and off.
+- These are referred to as "Actions", each Action controls a separate pin.
+- The number that comes after "on" or "off" is the time in seconds that it will remain in that state.
+- Enter "on" or "off", followed by a number of seconds to remain in that state, repeat on a new line.
+- Alternate state with each new line. Always start in "off" state, even if for zero seconds.
+- A correct PIN entry will cancel all actions if entered within the first "off" time frame.
+- Decimal numbers accepted. 
+
+
+Actions: always start in off state, 0's and decimals acceptable.
+
